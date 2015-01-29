@@ -83,6 +83,7 @@
 		$objPHPExcel->getActiveSheet()->setCellValue('B'.$i, $result[$i]['B']);
 		$objPHPExcel->getActiveSheet()->setCellValue('C'.$i, $result[$i]['C']);
 		$objPHPExcel->getActiveSheet()->setCellValue('D'.$i, $result[$i]['D']);
+		// echo $result[$i]['A'].' '.$result[$i]['B'].' '.$result[$i]['C'].' '.$result[$i]['D'].'<br />';
 	}
 	//file stroage
 	//store as excel(2007 and before) format
