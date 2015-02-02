@@ -5,6 +5,8 @@
 		*can be used as a sample for self using
 	use Regular Expression to search and get the protein family and get it down
 	*/
+	$start=$_GET['start'];
+	$end=$_GET['end'];
 	$type=0;//variety to store the type of family found
 	$result=array();//variety to store output data
 	// $result[1]=array();
@@ -26,7 +28,7 @@
 
 	// read the excel file
 	// $input_file = "keywords_table_unipid.xlsx";//file path
-	$input_file = "sample.xlsx";//file path
+	$input_file = "sample".$start."-".$end.".xlsx";//file path
 	$objPHPExcel = PHPExcel_IOFactory::load($input_file); 
 	$sheetData = $objPHPExcel->getSheet(0)->toArray(null, true, true, true);
 	$sheetData[1]['C']='Family';
