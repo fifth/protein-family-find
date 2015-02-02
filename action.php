@@ -51,7 +51,7 @@
 			if (preg_match("/superfamily/", $content, $matches)) {
 				if (preg_match("/(?<=\>)[\s\S]*?(?=\ssuperfamily)/", $content, $matches)) {
 					$content=$matches[0];
-					$type=1;
+					$type=1.5;
 				}
 			} else if (preg_match("/(?<=\>)[\s\S]*?(?=\sfamily)/", $content, $matches)) {
 				$content=$matches[0];
