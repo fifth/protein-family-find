@@ -39,6 +39,8 @@
 	while ($sheetData[$i]['A']) {
 		$content=file_get_contents("http://www.uniprot.org/uniprot/".$sheetData[$i]['B']);//get the information page of the protein
 		//get the part of "family_and_domains"
+			//type 3: either of above, default type
+			$type=3;
 		if (preg_match("/\<div\sclass\=\"section\s\"\sid\=\"family\_and\_domains\"\>[\s\S]*?\<div\sclass\=\"section\s\"\sid\=\"sequences\"\>/", $content, $matches)) {
 			$content=$matches[0];
 		}
@@ -46,10 +48,15 @@
 		if (preg_match("/Belongs\sto[\s\S]*?family\<\/a\>/", $content, $matches)) {
 			//type 1: belongs to certain family
 			$content=$matches[0];
-			if (preg_match("/(?<=\>)[\s\S]*?(?=\sfamily)/", $content, $matches)) {
+			if (preg_match("/superfamily/", $content, $matches)) {
+				if (preg_match("/(?<=\>)[\s\S]*?(?=\ssuperfamily)/", $content, $matches)) {
+					$content=$matches[0];
+					$type=1;
+				}
+			} else if (preg_match("/(?<=\>)[\s\S]*?(?=\sfamily)/", $content, $matches)) {
 				$content=$matches[0];
+				$type=1;
 			}
-			$type=1;
 		} else if (preg_match("/Family\sand\sdomain\sdatabases[\s\S]*?\<\/table\>/", $content, $matches)) {
 			//type 2: have a certain family
 			$content=$matches[0];
@@ -57,14 +64,12 @@
 				$content=$matches[0];
 				if (preg_match("/(?<=\<\/a\>\s)[\s\S]*?(?=\.)/", $content, $matches)) {
 				$content=$matches[0];
+				$type=2;
 				}
 			}
-			$type=2;
-		} else {
-			//type 3: either of above
+		}
+		if ($type==3) {
 			$content='';
-			$type=3;
-
 		}
 		$sheetData[$i]['C']=$content;
 		$sheetData[$i]['D']=$type;
