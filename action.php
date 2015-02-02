@@ -75,7 +75,9 @@
 		$sheetData[$i]['D']=$type;
 		echo '<tr><td>'.$sheetData[$i]['A'].'</td><td>'.$sheetData[$i]['B'].'</td><td>'.$sheetData[$i]['C'].'</td><td>'.$sheetData[$i]['D'].'</td></tr>';
 		$i++;
-	}		
+	}
+	echo "</table>";
+	echo "<script>alert('!!!')</script>";
 	//information get end
 
 
