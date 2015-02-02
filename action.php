@@ -28,7 +28,7 @@
 
 	// read the excel file
 	// $input_file = "keywords_table_unipid.xlsx";//file path
-	$input_file = "sample".$start."-".$end.".xlsx";//file path
+	$input_file = "sample.xlsx";//file path
 	$objPHPExcel = PHPExcel_IOFactory::load($input_file); 
 	$sheetData = $objPHPExcel->getSheet(0)->toArray(null, true, true, true);
 	$sheetData[1]['C']='Family';
@@ -36,9 +36,10 @@
 	//file reading end
 
 	//search and get the family information down to local files
-	$i=2;
+	// $i=2;
 	echo "<table>";
-	while ($sheetData[$i]['A']) {
+	for ($i=$start+1; $i<=$end+1; $i++)
+	/*while ($sheetData[$i]['A']) */{
 		$content=file_get_contents("http://www.uniprot.org/uniprot/".$sheetData[$i]['B']);//get the information page of the protein
 		//get the part of "family_and_domains"
 			//type 3: either of above, default type
@@ -76,7 +77,7 @@
 		$sheetData[$i]['C']=$content;
 		$sheetData[$i]['D']=$type;
 		echo '<tr><td>'.$sheetData[$i]['A'].'</td><td>'.$sheetData[$i]['B'].'</td><td>'.$sheetData[$i]['C'].'</td><td>'.$sheetData[$i]['D'].'</td></tr>';
-		$i++;
+		// $i++;
 	}
 	echo "</table>";
 	echo "<script>alert('!!!')</script>";
