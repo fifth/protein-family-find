@@ -90,7 +90,7 @@
 	$objPHPExcel->setActiveSheetIndex(0);//set current sheet
 	$objPHPExcel->getActiveSheet()->setTitle('sheet1');//set the name of the sheet
 	//set the value of each cell
-	for ($i=1; $i<=count($sheetData); $i++) {
+	for ($i=1; $i<=$end+1; $i++) {
 		$objPHPExcel->getActiveSheet()->setCellValue('A'.$i, $sheetData[$i]['A']);
 		$objPHPExcel->getActiveSheet()->setCellValue('B'.$i, $sheetData[$i]['B']);
 		$objPHPExcel->getActiveSheet()->setCellValue('C'.$i, $sheetData[$i]['C']);
