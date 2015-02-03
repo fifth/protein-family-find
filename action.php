@@ -24,8 +24,6 @@
 	include 'PHPExcel_1.8.0_doc/Classes/PHPExcel.php';
 	include 'PHPExcel_1.8.0_doc/Classes/PHPExcel/Writer/Excel2007.php';
 	$objPHPExcel = new PHPExcel();//create an excel file
-	$objPHPExcel->setActiveSheetIndex(0);//set current sheet
-	$objPHPExcel->getActiveSheet()->setTitle('sheet1');//set the name of the sheet
 
 	// read the excel file
 	// $input_file = "keywords_table_unipid.xlsx";//file path
@@ -81,10 +79,11 @@
 		// $i++;
 	}
 	echo "</table>";
-	echo "<script>alert('!!!')</script>";//alert when completed
 	//information get end
 
 
+	$objPHPExcel->setActiveSheetIndex(0);//set current sheet
+	$objPHPExcel->getActiveSheet()->setTitle('sheet1');//set the name of the sheet
 	//set the value of each cell
 	for ($i=1; $i<=count($sheetData); $i++) {
 		$objPHPExcel->getActiveSheet()->setCellValue('A'.$i, $sheetData[$i]['A']);
@@ -102,4 +101,5 @@
 	// $objWriter = new PHPExcel_Writer_Excel5($objPHPExcel);
 	$objWriter->save('output'.".xls");
 	//output and
+	echo "<script>alert('!!!')</script>";//alert when completed
 ?>
