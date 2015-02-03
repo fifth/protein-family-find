@@ -5,8 +5,13 @@
 		*can be used as a sample for self using
 	use Regular Expression to search and get the protein family and get it down
 	*/
-	$start=$_GET['start'];//start number
-	$end=$_GET['end'];//end number
+	if($argc==3){
+   		$start=$argv[1];
+   		$end=$argv[2];
+	}else{
+		$start=$_GET['start'];//start number
+		$end=$_GET['end'];//end number
+	}
 	//when multi operation from one input file
 	$type=0;//variety to store the type of family found
 	$result=array();//variety to store output data
