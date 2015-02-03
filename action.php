@@ -5,8 +5,9 @@
 		*can be used as a sample for self using
 	use Regular Expression to search and get the protein family and get it down
 	*/
-	$start=$_GET['start'];
-	$end=$_GET['end'];
+	$start=$_GET['start'];//start number
+	$end=$_GET['end'];//end number
+	//when multi operation from one input file
 	$type=0;//variety to store the type of family found
 	$result=array();//variety to store output data
 	// $result[1]=array();
@@ -72,33 +73,33 @@
 			}
 		}
 		if ($type==3) {
-			$content='';
+			$content='';//empty
 		}
 		$sheetData[$i]['C']=$content;
 		$sheetData[$i]['D']=$type;
-		echo '<tr><td>'.$sheetData[$i]['A'].'</td><td>'.$sheetData[$i]['B'].'</td><td>'.$sheetData[$i]['C'].'</td><td>'.$sheetData[$i]['D'].'</td></tr>';
+		echo '<tr><td>'.$sheetData[$i]['A'].'</td><td>'.$sheetData[$i]['B'].'</td><td>'.$sheetData[$i]['C'].'</td><td>'.$sheetData[$i]['D'].'</td></tr>';//print out on the screen
 		// $i++;
 	}
 	echo "</table>";
-	echo "<script>alert('!!!')</script>";
+	echo "<script>alert('!!!')</script>";//alert when completed
 	//information get end
 
 
 	//set the value of each cell
-	// for ($i=1; $i<=count($result); $i++) {
-	// 	$objPHPExcel->getActiveSheet()->setCellValue('A'.$i, $result[$i]['A']);
-	// 	$objPHPExcel->getActiveSheet()->setCellValue('B'.$i, $result[$i]['B']);
-	// 	$objPHPExcel->getActiveSheet()->setCellValue('C'.$i, $result[$i]['C']);
-	// 	$objPHPExcel->getActiveSheet()->setCellValue('D'.$i, $result[$i]['D']);
-	// 	// echo $result[$i]['A'].' '.$result[$i]['B'].' '.$result[$i]['C'].' '.$result[$i]['D'].'<br />';
-	// }
+	for ($i=1; $i<=count($sheetData); $i++) {
+		$objPHPExcel->getActiveSheet()->setCellValue('A'.$i, $sheetData[$i]['A']);
+		$objPHPExcel->getActiveSheet()->setCellValue('B'.$i, $sheetData[$i]['B']);
+		$objPHPExcel->getActiveSheet()->setCellValue('C'.$i, $sheetData[$i]['C']);
+		$objPHPExcel->getActiveSheet()->setCellValue('D'.$i, $sheetData[$i]['D']);
+		// echo $result[$i]['A'].' '.$result[$i]['B'].' '.$result[$i]['C'].' '.$result[$i]['D'].'<br />';
+	}
 	//file stroage
 
 	//output 
 	//store as excel(2007 and before) format
-	// $objWriter = new PHPExcel_Writer_Excel5($objPHPExcel);
+	$objWriter = new PHPExcel_Writer_Excel5($objPHPExcel);
 	//or store as excel(2010 and after) format 
 	// $objWriter = new PHPExcel_Writer_Excel5($objPHPExcel);
-	// $objWriter->save('output'.".xls");
+	$objWriter->save('output'.".xls");
 	//output and
 ?>
