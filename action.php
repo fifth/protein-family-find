@@ -6,9 +6,11 @@
 	use Regular Expression to search and get the protein family and get it down
 	*/
 	if($argc==3){
-   		$start=$argv[1];
-   		$end=$argv[2];
+		//input from command-line mode
+   		$start=$argv[1];//start number
+   		$end=$argv[2];//end number
 	}else{
+		//input from browser
 		$start=$_GET['start'];//start number
 		$end=$_GET['end'];//end number
 	}
@@ -106,5 +108,5 @@
 	// $objWriter = new PHPExcel_Writer_Excel5($objPHPExcel);
 	$objWriter->save('output'.".xls");
 	//output and
-	echo "<script>alert('!!!')</script>";//alert when completed
+	echo "<script>alert('!!!')</script>";//alert when completed(only in browser)
 ?>
